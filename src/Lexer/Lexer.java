@@ -1,3 +1,5 @@
+package Lexer;
+
 import java.util.Hashtable;
 
 /**
@@ -5,6 +7,7 @@ import java.util.Hashtable;
  */
 public class Lexer {
     static private Hashtable<String,Integer> keywordsTable;
+    private int pos;
 
     static {
         keywordsTable = new Hashtable();
@@ -28,6 +31,14 @@ public class Lexer {
     }
 
     public Lexer(char[] input){
-        
+        System.out.print(input);
+    }
+
+    public void nextToken(){
+
+    }
+
+    public int getToken(){
+        return 0;
     }
 }
