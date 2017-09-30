@@ -1,5 +1,7 @@
+package Main;
+
 /**
  * Created by alexcoelho on 30/09/17.
  */
-public class Lexer {
+public class Main {
 }
