@@ -42,7 +42,90 @@ public class Symbol {
         OR = 34,
         AND = 35,
         REMAINDER = 36,
-        NOT = 37,
-        //NEW SYMBOLS SHOULD BE ADDED HERE
-        LastSymbol = 38;
+        NOT = 37;
+
+
+
+    public static String toString(int token) {
+        switch (token) {
+            case Symbol.EOF:
+                return "EOF";
+            case Symbol.IDENT:
+                return "IDENT";
+            case Symbol.NUMBER:
+                return "NUMBER";
+            case Symbol.PLUS:
+                return "PLUS";
+            case Symbol.MINUS:
+                return "MINUS";
+            case Symbol.MULT:
+                return "MULT";
+            case Symbol.DIV:
+                return "DIV";
+            case Symbol.LT:
+                return "LT";
+            case Symbol.LE:
+                return "LE";
+            case Symbol.GT:
+                return "GET";
+            case Symbol.GE:
+                return "GE";
+            case Symbol.NEQ:
+                return "NEQ";
+            case Symbol.EQ:
+                return "EQ";
+            case Symbol.ASSIGN:
+                return "ASSIGN";
+            case Symbol.LEFTPAR:
+                return "LEFTPAR";
+            case Symbol.RIGHTPAR:
+                return "RIGHTPAR";
+            case Symbol.SEMICOLON:
+                return "SEMICOLON";
+            case Symbol.VAR:
+                return "VAR";
+            case Symbol.BEGIN:
+                return "BEGIN";
+            case Symbol.END:
+                return "END";
+            case Symbol.IF:
+                return "IF";
+            case Symbol.THEN:
+                return "THEN";
+            case Symbol.ELSE:
+                return "ELSE";
+            case Symbol.ENDIF:
+                return "ENDIF";
+            case Symbol.COMMA:
+                return "COMMA";
+            case Symbol.READ:
+                return "READ";
+            case Symbol.WRITE:
+                return "WRITE";
+            case Symbol.COLON:
+                return "COLON";
+            case Symbol.INTEGER:
+                return "INTEGER";
+            case Symbol.BOOLEAN:
+                return "BOOLEAN";
+            case Symbol.CHAR:
+                return "CHAR";
+            case Symbol.CHARACTER:
+                return "CHARACTER";
+            case Symbol.TRUE:
+                return "TRUE";
+            case Symbol.FALSE:
+                return "FALSE";
+            case Symbol.OR:
+                return "OR";
+            case Symbol.AND:
+                return "AND";
+            case Symbol.REMAINDER:
+                return "REMAINDER";
+            case Symbol.NOT:
+                return "NOT";
+            default:
+                return "ISSO NAO DEVIA APARECER";
+        }
+    }
 }

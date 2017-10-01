@@ -274,5 +274,11 @@ public class Lexer {
         return this.tokenObj.id;
     }
 
-    public int getTokenLine(){return this.tokenObj.line;}
+    public String getTokenValue() {
+        return "";
+    }
+
+    public int getTokenLine() {
+        return 0;
+    }
 }
