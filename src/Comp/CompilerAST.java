@@ -6,11 +6,18 @@ import Lexer.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Classe que compila e gera a classe.
+ */
 public class CompilerAST {
 
     private Lexer lexer;
 
+    /**
+     * Construtor padrao.
+     *
+     * @param lexer lexer necessario para montar a lista
+     */
     public CompilerAST(Lexer lexer) {
         this.lexer = lexer;
     }
@@ -91,13 +98,20 @@ public class CompilerAST {
         letters.add(letter());
 
         while (lexer.getToken() == Symbol.CHARACTER) {
-            lexer.nextToken();
             letters.add(letter());
+            lexer.nextToken();
         }
 
         return new IdentType(letters);
     }
 
+    /**
+     * Funcao que faz referincia a gramatica:
+     * SimpleExpr ::= Number | Variable | "true" | "false" | Character | ’(’ Expr ’)’ | "not" SimpleExpr | AddOp SimpleExpr
+     *
+     * @return Retorna uma refencia de uma expressao generica.
+     * @throws CompilerError
+     */
     Expr simpleExpr() throws CompilerError {
         lexer.nextToken();
 
@@ -132,6 +146,13 @@ public class CompilerAST {
         return null;
     }
 
+    /**
+     * Funcao que faz referencia a gramatica:
+     * Statement ::= AssignmentStatement | IfStatement | ReadStatement | WriteStatement
+     *
+     * @return Retorna uma refencia de uma expressao generica.
+     * @throws CompilerError
+     */
     Statement statement() throws CompilerError {
         lexer.nextToken();
 
@@ -148,6 +169,13 @@ public class CompilerAST {
 
     }
 
+    /**
+     * Funcao de entrada do programa que faz referencia a gramatica:
+     * Program ::= [ "var" VarDecList ] CompositeStatement
+     *
+     * @return Retorna a raiz da AST.
+     * @throws CompilerError
+     */
     public Program program() throws CompilerError {
         lexer.nextToken();
         VarDecList varDecList = null;
@@ -160,12 +188,16 @@ public class CompilerAST {
         return new Program(varDecList, compositeStatement);
     }
 
+    /**
+     * Funcao que faz referencia a gramatica:
+     * OrExpr ::= AndExpr [ "or" AndExpr ]
+     * @return
+     * @throws CompilerError
+     */
     Expr orExpr() throws CompilerError {
         List<Expr> exprs = new ArrayList<>();
 
         exprs.add(andExpr());
-
-        exprs.add(relExpr());
 
         if (lexer.getToken() == Symbol.OR) {
             int token = lexer.getToken();
@@ -177,13 +209,12 @@ public class CompilerAST {
 
     CompositeStatement compositeStatement() throws CompilerError {
 
-        lexer.getToken();
         if (lexer.getToken() != Symbol.BEGIN)
             return throwError(Symbol.BEGIN);
 
         StatementList statementList = statementList();
 
-        lexer.getToken();
+        lexer.nextToken();
         if (lexer.getToken() != Symbol.END)
             return throwError(Symbol.END);
 
@@ -192,7 +223,7 @@ public class CompilerAST {
 
     StatementList statementList() throws CompilerError {
         Statement statement = statement();
-        lexer.getToken();
+
         if (lexer.getToken() != Symbol.SEMICOLON)
             return throwError(Symbol.SEMICOLON);
 
@@ -205,9 +236,10 @@ public class CompilerAST {
 
         IdentType ident = ident();
 
-        lexer.getToken();
         if (lexer.getToken() != Symbol.ASSIGN)
             return throwError(Symbol.ASSIGN);
+
+        lexer.nextToken();
 
         Expr expr = orExpr();
 
@@ -307,6 +339,9 @@ public class CompilerAST {
         lexer.nextToken();
         if (lexer.getToken() != Symbol.SEMICOLON)
             return throwError(Symbol.SEMICOLON);
+
+        lexer.nextToken();
+
         return new VarDecList2(identTypes, type);
 
     }
