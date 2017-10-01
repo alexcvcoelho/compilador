@@ -33,7 +33,7 @@ public class Symbol {
         READ = 25,
         WRITE = 26,
         COLON = 27,
-        INTEGER = 18,
+        INTEGER = 28,
         BOOLEAN = 29,
         CHAR = 30,
         CHARACTER = 31,
