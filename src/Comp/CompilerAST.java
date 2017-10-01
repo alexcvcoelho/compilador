@@ -191,7 +191,8 @@ public class CompilerAST {
     /**
      * Funcao que faz referencia a gramatica:
      * OrExpr ::= AndExpr [ "or" AndExpr ]
-     * @return
+     *
+     * @return Uma classe generica de que representa uma expressao.
      * @throws CompilerError
      */
     Expr orExpr() throws CompilerError {
@@ -207,6 +208,13 @@ public class CompilerAST {
         return new OrExpr(exprs);
     }
 
+    /**
+     * Funcao que faz referencia a gramatica:
+     * CompositeStatement ::= "begin" StatementList "end"
+     *
+     * @return Retorn uma CompositeStatement
+     * @throws CompilerError
+     */
     CompositeStatement compositeStatement() throws CompilerError {
 
         if (lexer.getToken() != Symbol.BEGIN)
@@ -221,6 +229,13 @@ public class CompilerAST {
         return new CompositeStatement(statementList);
     }
 
+    /**
+     * Funcao que faz referencia a gramatica:
+     * StatementList ::= | Statement ";" StatementList
+     *
+     * @return Retorna uma lista de statement.
+     * @throws CompilerError
+     */
     StatementList statementList() throws CompilerError {
         Statement statement = statement();
 
@@ -231,7 +246,13 @@ public class CompilerAST {
 
     }
 
-
+    /**
+     * Funcao que faz referencia a gramatica:
+     * AssignmentStatement ::= Variable "=" OrExpr
+     *
+     * @return Retorna um statemente de assignment
+     * @throws CompilerError
+     */
     AssignmentStatement assignmentStatement() throws CompilerError {
 
         IdentType ident = ident();
@@ -247,6 +268,13 @@ public class CompilerAST {
 
     }
 
+    /**
+     * Funcao que faz referencia a gramatica:
+     * IfStatement ::= "if" OrExpr "then" StatementList [ "else" StatementList ] "endif"
+     *
+     * @return Retorna um statemente de um if
+     * @throws CompilerError
+     */
     IfStatement ifStatement() throws CompilerError {
 
         if (lexer.getToken() != Symbol.IF)
@@ -272,6 +300,13 @@ public class CompilerAST {
 
     }
 
+    /**
+     * Funcao que faz referencia a gramatica:
+     * ReadStatement ::= "read" "(" Variable ")"
+     *
+     * @return Retorna um statmente de leitura.
+     * @throws CompilerError
+     */
     ReadStatement readStatement() throws CompilerError {
 
         if (lexer.getToken() != Symbol.READ)
@@ -290,6 +325,13 @@ public class CompilerAST {
         return new ReadStatement(ident);
     }
 
+    /**
+     * Funcao que faz referencia a gramatica:
+     * WriteStatement ::= "write" "(" OrExpr ")"
+     *
+     * @return Retorna um statemente de leitura.
+     * @throws CompilerError
+     */
     WriteStatement writeStatement() throws CompilerError {
 
         if (lexer.getToken() != Symbol.WRITE)
