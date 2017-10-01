@@ -1,20 +1,17 @@
-package Compiler;
+package Comp;
 
 import AST.*;
 import Lexer.*;
-import sun.awt.geom.AreaOp;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.SynchronousQueue;
 
 
-public class Compiler {
+public class CompilerAST {
 
     private Lexer lexer;
 
-    public Compiler(Lexer lexer) {
+    public CompilerAST(Lexer lexer) {
         this.lexer = lexer;
     }
 
@@ -151,7 +148,7 @@ public class Compiler {
 
     }
 
-    Program program() throws CompilerError {
+    public Program program() throws CompilerError {
         lexer.nextToken();
         VarDecList varDecList = null;
         if (lexer.getToken() == Symbol.VAR) {

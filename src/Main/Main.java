@@ -1,5 +1,7 @@
 package Main;
 
+import Comp.CompilerAST;
+import Comp.CompilerError;
 import Lexer.Lexer;
 
 import java.io.*;
@@ -61,8 +63,12 @@ public class Main {
             // the generated code goes to a file and so are the errors
             try {
                 lexer = new Lexer(input);
+                Comp.CompilerAST compiler = new CompilerAST(lexer);
+                compiler.program();
             } catch (RuntimeException e) {
                 System.out.println(e);
+            } catch (CompilerError compilerError) {
+                compilerError.printStackTrace();
             }
 //            if (program != null) {
 //                PW pw = new PW();
